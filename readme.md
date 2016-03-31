@@ -13,8 +13,10 @@
 4. `npm install`
 5. replace `your_client_id` & `your_client_secret` in `keys.js`
 6. `node server.js`
-7. navigate to `http://localhost:8080/authorize_user`
-8. Login to instagram, and when page returns "Works" check your bash console and you'll see your API key
+7. navigate to `http://localhost:8080`
+8. Click link
+9. Login to instagram, and when page returns "Works" check your bash console and you'll see your API key
+10. Feed will be out putted to screen
 
 # Reading
 * https://nodejs.org/dist/latest-v4.x/docs/api/
