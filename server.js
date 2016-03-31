@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var api = require('instagram-node').instagram();
 var keys = require("./keys.js");
+var mrss = require("./mrss.js");
 
 
 var redirect_uri = 'http://localhost:8080/login';
@@ -31,13 +32,28 @@ handleauth = function (req, res) {
         } else {
             console.log('Yay! Access token is ' + result.access_token);
             api.use({access_token: result.access_token});
-            var options = { count: 100 };
-            api.user_self_media_recent([options], function(err, medias, pagination, remaining, limit) {
-                if(err){
+            var options = {count: 100};
+            api.user_self_media_recent([options], function (err, medias, pagination, remaining, limit) {
+                if (err) {
                     res.send(err.body);
                 }
-                else{
-                    res.send(medias);
+                else {
+                    medias.forEach(function (item) {
+                        if (item) {
+                            mrss.newItem(
+                                item.caption ? item.caption.text: "",
+                                item.link,
+                                item.caption ? item.caption.text: "",
+                                item.created_time,
+                                item.images.standard_resolution.url,
+                                "image/jpg",
+                                item.images.standard_resolution.height,
+                                item.images.standard_resolution.width
+                            );
+                        }
+                    });
+
+                    res.send(mrss.feed.xml());
                 }
             });
         }
@@ -45,5 +61,4 @@ handleauth = function (req, res) {
 };
 
 app.get('/authorize_user', authorize_user);
-// This is your redirect URI
 app.get('/login', handleauth);
