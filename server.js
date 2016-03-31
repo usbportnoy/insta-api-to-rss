@@ -14,7 +14,7 @@ app.listen(8080, function () {
     console.log('Example app listening on port 8080!');
 });
 
-exports.authorize_user = function (req, res) {
+authorize_user = function (req, res) {
     api.use({
         client_id: keys.client_id,
         client_secret: keys.client_secret
@@ -23,7 +23,7 @@ exports.authorize_user = function (req, res) {
 
 };
 
-exports.handleauth = function (req, res) {
+handleauth = function (req, res) {
     api.authorize_user(req.query.code, redirect_uri, function (err, result) {
         if (err) {
             console.log(err.body);
@@ -44,6 +44,6 @@ exports.handleauth = function (req, res) {
     });
 };
 
-app.get('/authorize_user', exports.authorize_user);
+app.get('/authorize_user', authorize_user);
 // This is your redirect URI
-app.get('/login', exports.handleauth);
+app.get('/login', handleauth);
