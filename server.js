@@ -32,7 +32,7 @@ exports.handleauth = function(req, res) {
         // ig.user_self_feed([options,] function(err, medias, pagination, remaining, limit) {
         //   console.log(err);
         //   res.send(medias);
-      });
+        //});
     }
   });
 };
