@@ -1,18 +1,21 @@
 var RSS = require('rss');
 
-var feed = new RSS({
-    title: "Feed for IG User",
-    ttl: '60',
-    language: 'en',
-    custom_namespaces: {
-        'media': 'http://search.yahoo.com/mrss'
-    }
-});
+var feed;
 
+var newFeed = function () {
+    this.feed = new RSS({
+        title: "Feed for IG User",
+        ttl: '60',
+        language: 'en',
+        custom_namespaces: {
+            'media': 'http://search.yahoo.com/mrss'
+        }
+    });
+}
 
 var newItem = function (title, link, description, pubDate, contentUrl, contentType, height, width) {
     //this pushes a new item to the feed
-    feed.item({
+    this.feed.item({
         title: title,
         link: link,
         description: description,
@@ -29,4 +32,4 @@ var newItem = function (title, link, description, pubDate, contentUrl, contentTy
     });
 };
 
-module.exports = {feed: feed, newItem: newItem};
+module.exports = {feed: feed, newItem: newItem, newFeed: newFeed};

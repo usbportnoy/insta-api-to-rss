@@ -32,33 +32,54 @@ handleauth = function (req, res) {
         } else {
             console.log('Yay! Access token is ' + result.access_token);
             api.use({access_token: result.access_token});
-            var options = {count: 100};
-            api.user_self_media_recent([options], function (err, medias, pagination, remaining, limit) {
-                if (err) {
-                    res.send(err.body);
-                }
-                else {
-                    medias.forEach(function (item) {
-                        if (item) {
-                            mrss.newItem(
-                                item.caption ? item.caption.text: "",
-                                item.link,
-                                item.caption ? item.caption.text: "",
-                                item.created_time,
-                                item.images.standard_resolution.url,
-                                "image/jpg",
-                                item.images.standard_resolution.height,
-                                item.images.standard_resolution.width
-                            );
-                        }
-                    });
+            res.send("Done!");
 
-                    res.send(mrss.feed.xml());
-                }
-            });
         }
     });
 };
 
+rss = function (req, res) {
+    var options = {count: 100};
+    api.user_self_media_recent([options], function (err, medias, pagination, remaining, limit) {
+        if (err) {
+            res.send(err.body);
+        }
+        else {
+            mrss.newFeed();
+            medias.forEach(function (item) {
+
+                if (item) {
+                    if (item.videos) {
+                        mrss.newItem(
+                            item.caption ? item.caption.text : "",
+                            item.link,
+                            item.caption ? item.caption.text : "",
+                            item.created_time,
+                            item.videos.standard_resolution.url,
+                            "video/mp4",
+                            item.videos.standard_resolution.height,
+                            item.videos.standard_resolution.width
+                        );
+                    }
+                    else {
+                        mrss.newItem(
+                            item.caption ? item.caption.text : "",
+                            item.link,
+                            item.caption ? item.caption.text : "",
+                            item.created_time,
+                            item.images.standard_resolution.url,
+                            "image/jpg",
+                            item.images.standard_resolution.height,
+                            item.images.standard_resolution.width
+                        );
+                    }
+                }
+            });
+            res.send(mrss.feed.xml());
+        }
+    });
+}
+
 app.get('/authorize_user', authorize_user);
 app.get('/login', handleauth);
+app.get('/rss', rss)
