@@ -3,11 +3,15 @@
 * Node installed (https://nodejs.org/en/)
 
 
+# Versions
+* npm 3.3.12
+* node 5.4.1
+
 # Configure Instagram
 * Set redirect uri in your client configuration to `http://localhost:8080/login`
 
 # Install
-1. Open git bash
+1. Open git bash if on windows, or your terminal on linux/mac
 2. `git clone https://github.com/usbportnoy/insta-api-to-rss.git`
 3. `cd insta-api-to-rss`
 4. `npm install`
