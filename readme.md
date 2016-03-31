@@ -16,7 +16,8 @@
 7. navigate to `http://localhost:8080`
 8. Click link
 9. Login to instagram
-10. Feed will be produced
+10. Server will be initialized 
+11. Use web-browser to view feed at `http://localhost:8080/rss`
 
 # Reading
 * https://nodejs.org/dist/latest-v4.x/docs/api/
