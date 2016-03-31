@@ -15,8 +15,8 @@
 6. `node server.js`
 7. navigate to `http://localhost:8080`
 8. Click link
-9. Login to instagram, and when page returns "Works" check your bash console and you'll see your API key
-10. Feed will be out putted to screen
+9. Login to instagram
+10. Feed will be produced
 
 # Reading
 * https://nodejs.org/dist/latest-v4.x/docs/api/
