@@ -1,11 +1,14 @@
+var Ddos = require('ddos');
+var ddos = new Ddos;
 var express = require('express');
 var app = express();
 var api = require('instagram-node').instagram();
 var keys = require("./keys.js");
 var mrss = require("./mrss.js");
 
-
 var redirect_uri = 'http://localhost:8080/login';
+
+app.use(ddos.express);
 
 app.get('/', function (req, res) {
     res.send("Please navigate to \<a href=\"http://localhost:8080/authorize_user\">Instagram oAuth</a>");
@@ -40,6 +43,7 @@ handleauth = function (req, res) {
 
 rss = function (req, res) {
     var options = {count: 100};
+    console.log("RSS Request");
     api.user_self_media_recent([options], function (err, medias, pagination, remaining, limit) {
         if (err) {
             res.send(err.body);
@@ -47,7 +51,6 @@ rss = function (req, res) {
         else {
             mrss.newFeed();
             medias.forEach(function (item) {
-
                 if (item) {
                     if (item.videos) {
                         mrss.newItem(
