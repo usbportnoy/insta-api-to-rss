@@ -17,9 +17,9 @@
 8. Login to instagram, and when page returns "Works" check your bash console and you'll see your API key
 
 # Reading
-https://nodejs.org/dist/latest-v4.x/docs/api/
-http://expressjs.com/
-https://www.npmjs.com/package/instagram-node
-http://www.restapitutorial.com/lessons/httpmethods.html
+* https://nodejs.org/dist/latest-v4.x/docs/api/
+* http://expressjs.com/
+* https://www.npmjs.com/package/instagram-node
+* http://www.restapitutorial.com/lessons/httpmethods.html
 
 
