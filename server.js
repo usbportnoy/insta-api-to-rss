@@ -17,7 +17,7 @@ app.listen(8080, function () {
 });
 
 exports.authorize_user = function(req, res) {
-  res.redirect(api.get_authorization_url(redirect_uri, { scope: ['likes'], state: 'a state' }));
+  res.redirect(api.get_authorization_url(redirect_uri, { scope: ['likes', 'basic'], state: 'a state' }));
 };
 
 exports.handleauth = function(req, res) {
@@ -29,7 +29,7 @@ exports.handleauth = function(req, res) {
       console.log('Yay! Access token is ' + result.access_token);
       api.use({ access_token: result.access_token });
       res.send("Works");
-        // var options = { count:100 }
+        // var options = { count: 100 }
         // ig.user_self_feed([options,] function(err, medias, pagination, remaining, limit) {
         //   console.log(err);
         //   res.send(medias);
