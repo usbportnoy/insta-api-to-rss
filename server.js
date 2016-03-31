@@ -1,11 +1,13 @@
 var express = require('express');
 var app = express();
 var api = require('instagram-node').instagram();
+var keys = require("./keys.js");
+
 
 var redirect_uri = 'http://localhost:8080/login';
 
 app.get('/', function (req, res) {
-    res.send('Hello World!');
+    res.send("Please navigate to \<a href=\"http://localhost:8080/authorize_user\">Instagram oAuth</a>");
 });
 
 app.listen(8080, function () {
@@ -14,8 +16,8 @@ app.listen(8080, function () {
 
 exports.authorize_user = function (req, res) {
     api.use({
-        client_id: 'client_id',
-        client_secret: 'client_secret'
+        client_id: keys.client_id,
+        client_secret: keys.client_secret
     });
     res.redirect(api.get_authorization_url(redirect_uri, {scope: ['basic'], state: 'a state'}));
 
